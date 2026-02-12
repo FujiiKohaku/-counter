@@ -65,8 +65,12 @@ function normalizeText(text) {
         return String.fromCharCode(match.charCodeAt(0) + 0x60);
     });
 
+    // 小文字化（安全のため）
+    text = text.toLowerCase();
+
     return text.trim();
 }
+
 
 
 function hiraganaToKatakana(text) {
@@ -74,3 +78,4 @@ function hiraganaToKatakana(text) {
         return String.fromCharCode(match.charCodeAt(0) + 0x60);
     });
 }
+
