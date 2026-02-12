@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <style>
+<style>
 body {
     font-family: sans-serif;
     text-align: center;
@@ -46,7 +46,7 @@ button {
 
 <h1>カウンターピック検索</h1>
 
-<input type="text" id="championName" placeholder="キャラ名を入力">
+<input type="text" id="championName" placeholder="キャラ名を入力" oninput="showSuggestions()">
 <div id="suggestions"></div>
 <button onclick="searchChampion()">検索</button>
 
