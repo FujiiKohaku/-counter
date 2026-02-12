@@ -2,7 +2,7 @@ const counterData = {
     "マルファイト": ["イラオイ", "ガレン", "モルデカイザー"],
     "ダリウス": ["クイン", "ティーモ", "ヴェイン"],
     "ヤスオ": ["レネクトン", "パンテオン", "アニー"],
-    "ティーモ": ["終わっている人間"],
+   "ティーモ": ["終わっている人間"]
 };
 
 function searchChampion() {
@@ -80,4 +80,5 @@ function hiraganaToKatakana(text) {
         return String.fromCharCode(match.charCodeAt(0) + 0x60);
     });
 }
+
 
