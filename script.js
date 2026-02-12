@@ -54,10 +54,21 @@ function showSuggestions() {
 }
 
 function normalizeText(text) {
-    return text
-        .toLowerCase()
-        .replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
-            return String.fromCharCode(s.charCodeAt(0) - 65248);
-        })
-        .trim();
+    text = text.toLowerCase();
+
+    // 全角英数字 → 半角
+    text = text.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
+        return String.fromCharCode(s.charCodeAt(0) - 65248);
+    });
+
+    // ひらがな → カタカナ
+    text = hiraganaToKatakana(text);
+
+    return text.trim();
+}
+
+function hiraganaToKatakana(text) {
+    return text.replace(/[\u3041-\u3096]/g, function(match) {
+        return String.fromCharCode(match.charCodeAt(0) + 0x60);
+    });
 }
