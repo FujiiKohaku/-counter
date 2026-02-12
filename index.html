@@ -1,6 +1,44 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <style>
+body {
+    font-family: sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+
+input {
+    padding: 10px;
+    width: 250px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#suggestions {
+    width: 250px;
+    margin: 0 auto;
+    text-align: left;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.suggestion-item {
+    padding: 8px;
+    cursor: pointer;
+    background: white;
+}
+
+.suggestion-item:hover {
+    background: #f0f0f0;
+}
+</style>
+
 <meta charset="UTF-8">
 <title>LOL カウンターピック検索</title>
 </head>
@@ -8,7 +46,7 @@
 
 <h1>カウンターピック検索</h1>
 
-<input type="text" id="championName" placeholder="キャラ名を入力" oninput="showSuggestions()">
+<input type="text" id="championName" placeholder="キャラ名を入力">
 <div id="suggestions"></div>
 <button onclick="searchChampion()">検索</button>
 
@@ -18,4 +56,3 @@
 
 </body>
 </html>
-

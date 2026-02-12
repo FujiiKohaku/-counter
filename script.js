@@ -5,17 +5,25 @@ const counterData = {
 };
 
 function searchChampion() {
-    const input = document.getElementById("championName").value;
+    const input = normalizeText(document.getElementById("championName").value);
     const result = document.getElementById("result");
 
-    if (counterData[input]) {
-        result.textContent = "カウンター: " + counterData[input].join(", ");
-    } else {
-        result.textContent = "データがありません";
+    const champions = Object.keys(counterData);
+
+    for (let i = 0; i < champions.length; i++) {
+        const normalizedName = normalizeText(champions[i]);
+
+        if (normalizedName.includes(input)) {
+            result.textContent = "カウンター: " + counterData[champions[i]].join(", ");
+            return;
+        }
     }
+
+    result.textContent = "データがありません";
 }
+
 function showSuggestions() {
-    const input = document.getElementById("championName").value;
+    const input = normalizeText(document.getElementById("championName").value);
     const suggestionsDiv = document.getElementById("suggestions");
 
     suggestionsDiv.innerHTML = "";
@@ -27,10 +35,13 @@ function showSuggestions() {
     const champions = Object.keys(counterData);
 
     for (let i = 0; i < champions.length; i++) {
-        if (champions[i].startsWith(input)) {
+        const normalizedName = normalizeText(champions[i]);
+
+        if (normalizedName.includes(input)) {
 
             const div = document.createElement("div");
             div.textContent = champions[i];
+            div.className = "suggestion-item";
 
             div.onclick = function() {
                 document.getElementById("championName").value = champions[i];
@@ -40,4 +51,13 @@ function showSuggestions() {
             suggestionsDiv.appendChild(div);
         }
     }
+}
+
+function normalizeText(text) {
+    return text
+        .toLowerCase()
+        .replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
+            return String.fromCharCode(s.charCodeAt(0) - 65248);
+        })
+        .trim();
 }
