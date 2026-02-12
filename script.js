@@ -13,7 +13,7 @@ function searchChampion() {
     for (let i = 0; i < champions.length; i++) {
         const normalizedName = normalizeText(champions[i]);
 
-        if (normalizedName.includes(input)) {
+        if (normalizedName.indexOf(input) !== -1) {
             result.textContent = "カウンター: " + counterData[champions[i]].join(", ");
             return;
         }
@@ -37,7 +37,7 @@ function showSuggestions() {
     for (let i = 0; i < champions.length; i++) {
         const normalizedName = normalizeText(champions[i]);
 
-        if (normalizedName.includes(input)) {
+        if (normalizedName.indexOf(input) !== -1) {
 
             const div = document.createElement("div");
             div.textContent = champions[i];
@@ -65,11 +65,12 @@ function normalizeText(text) {
         return String.fromCharCode(match.charCodeAt(0) + 0x60);
     });
 
-    // 小文字化（安全のため）
-    text = text.toLowerCase();
+    // Unicode正規化（超重要）
+    text = text.normalize("NFKC");
 
     return text.trim();
 }
+
 
 
 
@@ -78,4 +79,3 @@ function hiraganaToKatakana(text) {
         return String.fromCharCode(match.charCodeAt(0) + 0x60);
     });
 }
-
