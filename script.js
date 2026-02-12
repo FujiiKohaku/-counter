@@ -6,6 +6,11 @@ const counterData = {
 };
 
 function searchChampion() {
+    if (input === "") {
+    result.textContent = "";
+    return;
+}
+
     const input = normalizeText(document.getElementById("championName").value);
     const result = document.getElementById("result");
 
@@ -80,5 +85,6 @@ function hiraganaToKatakana(text) {
         return String.fromCharCode(match.charCodeAt(0) + 0x60);
     });
 }
+
 
 
