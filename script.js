@@ -54,7 +54,6 @@ function showSuggestions() {
 }
 
 function normalizeText(text) {
-    text = text.toLowerCase();
 
     // 全角英数字 → 半角
     text = text.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
@@ -62,10 +61,13 @@ function normalizeText(text) {
     });
 
     // ひらがな → カタカナ
-    text = hiraganaToKatakana(text);
+    text = text.replace(/[\u3041-\u3096]/g, function(match) {
+        return String.fromCharCode(match.charCodeAt(0) + 0x60);
+    });
 
     return text.trim();
 }
+
 
 function hiraganaToKatakana(text) {
     return text.replace(/[\u3041-\u3096]/g, function(match) {
